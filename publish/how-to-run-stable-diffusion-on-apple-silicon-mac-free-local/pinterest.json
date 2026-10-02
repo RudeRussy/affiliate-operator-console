@@ -1,0 +1,21 @@
+{
+  "platform": "pinterest",
+  "title": "Stable Diffusion Mac",
+  "description": "If you've got an Apple Silicon Mac and you want to generate AI images without paying for cloud services, this is the exact setup I use on my 64GB Mac Studio. I'll show you how to run Stable Diffusion locally, completely free, and the tool I recommend makes it dead simple. Disclosure: this video contains affiliate links. If you buy through them I may earn a commission at no extra cost to you. I only recommend tools I have actually used. As an affiliate I earn from qualifying purchases.",
+  "tags": [
+    "stablediffusion",
+    "applesilicon",
+    "mac",
+    "aiart",
+    "diffusionbee",
+    "localai"
+  ],
+  "tracked_link": "http://127.0.0.1:8788/r/01M3Y7Y6CV",
+  "image_prompts": [
+    "Apple Mac Studio computer on a desk, screen showing a colorful AI-generated landscape, photorealistic, high detail, soft studio lighting, no text",
+    "Close-up of a Mac keyboard and mouse, with a futuristic AI interface on screen, glowing elements, dark background, cinematic",
+    "A minimalist workspace with an iMac, screen displaying a grid of AI-generated images, bright natural light, clean composition",
+    "The DiffusionBee app interface on a Mac screen, showing a prompt box and generated image, flat design, clear UI, no text overlay",
+    "An abstract representation of local AI processing, with a Mac chip and neural network lines, blue and purple tones, high-tech, no text"
+  ]
+}

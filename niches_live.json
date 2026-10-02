@@ -1,0 +1,1312 @@
+{
+  "seeds": [
+    "ai product photos",
+    "etsy seo",
+    "sell on shopify",
+    "product photography"
+  ],
+  "geo": "GB",
+  "ts": 1790942527,
+  "sources": {
+    "autocomplete": {
+      "google:ai product photos": [
+        "ai product photos",
+        "ai product photoshoot",
+        "ai product photos reddit",
+        "ai product photos on etsy",
+        "ai product photos free",
+        "ai product photoshoot free",
+        "ai product photos generator",
+        "ai product photoshoot generator",
+        "ai product photoshoot generator free",
+        "ai product photoshoot prompt"
+      ],
+      "ddg:ai product photos": [
+        "ai product photos",
+        "ai product photoshoot",
+        "ai product photoshoot generator",
+        "ai product photo editor",
+        "ai product photo generator",
+        "ai product photo generator free",
+        "ai product photo enhancer",
+        "ai product photography"
+      ],
+      "google:etsy seo": [
+        "etsy seo",
+        "etsy seo tools",
+        "etsy seo tips",
+        "etsy seo generator",
+        "etsy seo guide",
+        "etsy seo meaning",
+        "etsy seo tools free",
+        "etsy seo 2026",
+        "etsy seo expert",
+        "etsy seo checker"
+      ],
+      "ddg:etsy seo": [
+        "etsy seo",
+        "etsy seo tools",
+        "etsy seo generator",
+        "etsy seo keywords",
+        "etsy seo tips",
+        "etsy seo listing title for this mousepad",
+        "etsy seo 2020",
+        "etsy seo tools free"
+      ],
+      "google:sell on shopify": [
+        "sell on shopify",
+        "sell on shopify for free",
+        "sell on shopify uk",
+        "sell on shopify or amazon",
+        "sell on shopify or etsy",
+        "sell on shopify without inventory",
+        "sell on shopify dropshipping",
+        "sell on shopify india",
+        "sell on shopify cost",
+        "sell on shopify canada"
+      ],
+      "ddg:sell on shopify": [
+        "sell on shopify",
+        "sell on shopify for free",
+        "sell on shopify or amazon",
+        "sale on shopify",
+        "what to sell on shopify",
+        "how to sell on shopify for beginners",
+        "products to sell on shopify",
+        "how to sell on shopify without inventory"
+      ],
+      "google:product photography": [
+        "product photography",
+        "product photography setup",
+        "product photography near me",
+        "product photography box",
+        "product photography jobs",
+        "product photography ai",
+        "product photography backdrops",
+        "product photography prompts",
+        "product photography ideas",
+        "product photography lighting"
+      ],
+      "ddg:product photography": [
+        "product photography",
+        "product photography studio",
+        "product photography services",
+        "product photography pricing",
+        "product photography near me",
+        "product photography definition",
+        "product photography setup",
+        "product photography near me rates"
+      ]
+    },
+    "news": {
+      "ai product photos": {
+        "count": 9,
+        "titles": [
+          "ai product photos",
+          "why marketplace sellers are turning product photos into 3d models with ai",
+          "how ai-generated 3d is changing retail product visualization in 2026",
+          "i forgot to take product photos. but it's okay, ai was a godsend"
+        ],
+        "dates": [
+          "Mon, 28 Sep 2026 15:49:00 GMT",
+          "Wed, 30 Sep 2026 15:29:00 GMT",
+          "Sat, 26 Sep 2026 00:47:00 GMT",
+          "Mon, 31 Aug 2026 06:50:00 GMT"
+        ]
+      },
+      "etsy seo": {
+        "count": 6,
+        "titles": [
+          "etsy seo",
+          "how international sellers optimize etsy stores for search",
+          "etsy seo: how to optimize your shop & listings for search",
+          "seo for etsy: three tips to improve your store\u2019s search visibility"
+        ],
+        "dates": [
+          "Sun, 15 Jun 2025 17:00:00 GMT",
+          "Fri, 23 Apr 2021 05:45:00 GMT",
+          "Tue, 28 Jun 2016 07:35:00 GMT",
+          "Wed, 12 Jun 2024 11:16:00 GMT"
+        ]
+      },
+      "sell on shopify": {
+        "count": 6,
+        "titles": [
+          "sell on shopify",
+          "how to sell on shopify in 7 easy steps (2026 guide)",
+          "selling on shopify? this is why you may want retargeting",
+          "how to start a sake online shop on shopify? 7 items including liquor sales license, age verification, and cool delivery"
+        ],
+        "dates": [
+          "Wed, 29 Jan 2025 00:13:00 GMT",
+          "Fri, 19 Jul 2024 03:59:00 GMT",
+          "Wed, 30 Sep 2026 00:53:00 GMT",
+          "Sun, 19 Jan 2025 14:09:00 GMT"
+        ]
+      },
+      "product photography": {
+        "count": 10,
+        "titles": [
+          "product photography",
+          "what is product photography and why is it important?",
+          "the ultimate tutorial on product photography",
+          "techniques for enhancing your product photos"
+        ],
+        "dates": [
+          "Tue, 07 Jul 2020 02:10:00 GMT",
+          "Mon, 29 Jan 2018 12:01:00 GMT",
+          "Tue, 28 Mar 2023 04:30:00 GMT",
+          "Sun, 19 Apr 2026 21:04:00 GMT"
+        ]
+      }
+    },
+    "trends": [
+      "aryna sabalenka",
+      "maidenhead travelodge",
+      "diesel fuel",
+      "alison hammond",
+      "south korea vs venezuela",
+      "olivia dean",
+      "charles spencer, 9th earl spencer",
+      "axs tickets",
+      "the fa",
+      "rowan atkinson"
+    ],
+    "hn": {
+      "ai product photos": {
+        "hits": 20,
+        "points": 48,
+        "titles": [
+          "Show HN: Simplicity AI, generate AI product photos indistinguishable from humans",
+          "AIPackshot \u2013 AI Product Photo Generator",
+          "Show HN: Mersel AI \u2013 Turn product photo into marketing reels in few clicks"
+        ]
+      },
+      "etsy seo": {
+        "hits": 20,
+        "points": 481,
+        "titles": [
+          "Ask HN: AppSumo Keyword Ranking Tool",
+          "Tell HN: Makers beware, Etsy will ruin your small business",
+          "Ask HN: Do you have any recommendations for Etsy? (for Notion Templates)"
+        ]
+      },
+      "sell on shopify": {
+        "hits": 20,
+        "points": 408,
+        "titles": [
+          "Ask HN: Do you sell on Shopify or WooCommerce?",
+          "Show HN: Alva Digital Downloads \u2013 I built a better way to sell files on Shopify",
+          "Launch HN: [name-redacted] (YC [year-redacted]) \u2013 Price A/B Testing for Shopify"
+        ]
+      },
+      "product photography": {
+        "hits": 20,
+        "points": 44,
+        "titles": [
+          "Show HN: ui.camera \u2013 Product photography for software",
+          "Piper: Custom product photography",
+          "Product Photography Using Your Smartphone: The Lighting Matters, Camera Does Not"
+        ]
+      }
+    },
+    "github": [
+      {
+        "name": "zai-org/ZCode",
+        "stars": 7316,
+        "desc": "z.ai's coding agent harness. powerful, intelligent, extensible.",
+        "url": "https://github.com/zai-org/ZCode"
+      },
+      {
+        "name": "jev-chat/jev-chat-jarvis",
+        "stars": 7248,
+        "desc": "\u88c5\u5728\u624b\u673a\u4e0a\u7684\u5bf9\u8bdd\u526f\u9a7e\uff1a\u5728 qq / x / \u98de\u4e66\u91cc\u8bfb\u61c2\u5bf9\u65b9\u3001\u7ed9\u51fa\u5019\u9009\u56de\u590d\u3001\u4e00\u952e\u586b\u5165\u8f93\u5165\u6846\uff0c\u53d1\u4e0d\u53d1\u7531\u4f60\u3002\u975e\u4fb5\u5165\uff0c\u53ea\u8bfb\u5c4f\u5e55\uff0c\u4e0d hook \u4e0d\u6539\u5305\u3002",
+        "url": "https://github.com/jev-chat/jev-chat-jarvis"
+      },
+      {
+        "name": "mizorewww/laya-mlx",
+        "stars": 6703,
+        "desc": "native mlx runtime for laya typed decision models \u2014 7\u201314 ms short decisions on m3 max. no text generation, pytorch, or c",
+        "url": "https://github.com/mizorewww/laya-mlx"
+      },
+      {
+        "name": "Niko1221/Strata",
+        "stars": 5336,
+        "desc": "qwen3.8-flash-next on any consumer hardware: one-click install for windows / linux. strata inference engine, openai/anth",
+        "url": "https://github.com/Niko1221/Strata"
+      },
+      {
+        "name": "KKKKhazix/AIHOT",
+        "stars": 4894,
+        "desc": "\u4e00\u4e2a\u81ea\u5df1\u627e\u70ed\u70b9\u3001\u81ea\u5df1\u5199\u65e5\u62a5\u7684\u7f51\u7ad9\u6846\u67b6\u3002\u628a\u4fe1\u6e90\u548c\u7cbe\u9009\u6807\u51c6\u6362\u6210\u4f60\u7684\uff0c\u5b83\u5c31\u662f\u4f60\u7684\u884c\u4e1a\u70ed\u70b9\u7ad9\u3002",
+        "url": "https://github.com/KKKKhazix/AIHOT"
+      },
+      {
+        "name": "yetone/magpie",
+        "stars": 4188,
+        "desc": "every agent's model. one place. codex on deepseek, claude code on kimi, from the menu bar.",
+        "url": "https://github.com/yetone/magpie"
+      },
+      {
+        "name": "newliver666/apk-reverse",
+        "stars": 3154,
+        "desc": "suitable for android apk reverse engineering analysis",
+        "url": "https://github.com/newliver666/apk-reverse"
+      },
+      {
+        "name": "Contrastive-LM/CLM",
+        "stars": 2715,
+        "desc": "",
+        "url": "https://github.com/Contrastive-LM/CLM"
+      },
+      {
+        "name": "Louis-CFM/coucou",
+        "stars": 2711,
+        "desc": "a tiny friend that lives in your notch (macos) or at the top of your screen (windows, linux) and keeps an eye on your co",
+        "url": "https://github.com/Louis-CFM/coucou"
+      },
+      {
+        "name": "feder-cr/dots",
+        "stars": 2418,
+        "desc": "open-source dots for the web: an ai agent with its own browser, one that does not get blocked.",
+        "url": "https://github.com/feder-cr/dots"
+      },
+      {
+        "name": "driceroland/Search",
+        "stars": 2317,
+        "desc": "a small, fast webkit browser for macos, by office commun.",
+        "url": "https://github.com/driceroland/Search"
+      },
+      {
+        "name": "mexicat/pdoom-video",
+        "stars": 2226,
+        "desc": "code-rendered music video for \"i'm upping my p(doom)\"",
+        "url": "https://github.com/mexicat/pdoom-video"
+      },
+      {
+        "name": "shihabal3amri/DiPlay",
+        "stars": 2223,
+        "desc": "independent carplay receiver for compatible android head units. wired and wireless public preview.",
+        "url": "https://github.com/shihabal3amri/DiPlay"
+      },
+      {
+        "name": "tobi/disktree",
+        "stars": 2143,
+        "desc": "a treemap for finding and removing what fills your disk, for omarchy. rust + gpui.",
+        "url": "https://github.com/tobi/disktree"
+      },
+      {
+        "name": "unreallabsai/unreal-agent",
+        "stars": 2050,
+        "desc": "async-first agent harness",
+        "url": "https://github.com/unreallabsai/unreal-agent"
+      }
+    ],
+    "producthunt": []
+  },
+  "candidates": [
+    {
+      "term": "etsy seo",
+      "score": 11.5,
+      "specificity": 0.75,
+      "demand_count": 16.5,
+      "sources": [
+        "autocomplete",
+        "phrase"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 6,
+      "hn_points": 481,
+      "commercial_intent": 1,
+      "best_program": "Surfer SEO",
+      "best_rate": 125.0,
+      "programs": [
+        "Surfer SEO",
+        "OmniSEO",
+        "Koala AI"
+      ],
+      "trending_now": false,
+      "sample": [
+        "etsy seo"
+      ]
+    },
+    {
+      "term": "product photography",
+      "score": 8.2,
+      "specificity": 0.75,
+      "demand_count": 21.5,
+      "sources": [
+        "autocomplete",
+        "phrase"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 10,
+      "hn_points": 44,
+      "commercial_intent": 1,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Relentless Nature"
+      ],
+      "trending_now": false,
+      "sample": [
+        "product photography"
+      ]
+    },
+    {
+      "term": "etsy seo tools free",
+      "score": 7.8,
+      "specificity": 0.88,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 2,
+      "hn_points": 138,
+      "commercial_intent": 2,
+      "best_program": "Surfer SEO",
+      "best_rate": 125.0,
+      "programs": [
+        "Surfer SEO",
+        "Passpack",
+        "OmniSEO"
+      ],
+      "trending_now": false,
+      "sample": [
+        "etsy seo tools free"
+      ]
+    },
+    {
+      "term": "ai product photoshoot",
+      "score": 7.3,
+      "specificity": 0.8,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 3,
+      "hn_points": 341,
+      "commercial_intent": 2,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Relentless Nature"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photoshoot"
+      ]
+    },
+    {
+      "term": "etsy seo tools",
+      "score": 7.0,
+      "specificity": 0.8,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 4,
+      "hn_points": 58,
+      "commercial_intent": 2,
+      "best_program": "Surfer SEO",
+      "best_rate": 125.0,
+      "programs": [
+        "Surfer SEO",
+        "Passpack",
+        "OmniSEO"
+      ],
+      "trending_now": false,
+      "sample": [
+        "etsy seo tools"
+      ]
+    },
+    {
+      "term": "etsy seo generator",
+      "score": 6.9,
+      "specificity": 0.9,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 600,
+      "commercial_intent": 1,
+      "best_program": "Surfer SEO",
+      "best_rate": 125.0,
+      "programs": [
+        "Surfer SEO",
+        "OmniSEO",
+        "TTSOpenAI - AI Voice Generator"
+      ],
+      "trending_now": false,
+      "sample": [
+        "etsy seo generator"
+      ]
+    },
+    {
+      "term": "ai product photoshoot generator",
+      "score": 6.8,
+      "specificity": 0.95,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 221,
+      "commercial_intent": 2,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Relentless Nature"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photoshoot generator"
+      ]
+    },
+    {
+      "term": "product photography setup",
+      "score": 6.8,
+      "specificity": 0.9,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 5,
+      "hn_points": 532,
+      "commercial_intent": 1,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Heard"
+      ],
+      "trending_now": false,
+      "sample": [
+        "product photography setup"
+      ]
+    },
+    {
+      "term": "etsy seo meaning",
+      "score": 6.6,
+      "specificity": 0.9,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 172,
+      "commercial_intent": 1,
+      "best_program": "Surfer SEO",
+      "best_rate": 125.0,
+      "programs": [
+        "Surfer SEO",
+        "OmniSEO",
+        "Koala AI"
+      ],
+      "trending_now": false,
+      "sample": [
+        "etsy seo meaning"
+      ]
+    },
+    {
+      "term": "ai product photos on etsy",
+      "score": 6.6,
+      "specificity": 0.8,
+      "demand_count": 2,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 7,
+      "hn_points": 234,
+      "commercial_intent": 1,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Photoroom",
+        "Deputy"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photos on etsy"
+      ]
+    },
+    {
+      "term": "etsy seo tips",
+      "score": 6.3,
+      "specificity": 0.75,
+      "demand_count": 5,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 2,
+      "hn_points": 361,
+      "commercial_intent": 1,
+      "best_program": "Surfer SEO",
+      "best_rate": 125.0,
+      "programs": [
+        "Surfer SEO",
+        "OmniSEO",
+        "Koala AI"
+      ],
+      "trending_now": false,
+      "sample": [
+        "etsy seo tips"
+      ]
+    },
+    {
+      "term": "product photos",
+      "score": 6.1,
+      "specificity": 0.6,
+      "demand_count": 5.0,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 11,
+      "hn_points": 109,
+      "commercial_intent": 1,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Photoroom",
+        "Deputy"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "product photoshoot",
+      "score": 5.9,
+      "specificity": 0.75,
+      "demand_count": 3.5,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 2,
+      "hn_points": 145,
+      "commercial_intent": 2,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Relentless Nature"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "ai product photos",
+      "score": 5.8,
+      "specificity": 0.7,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 9,
+      "hn_points": 48,
+      "commercial_intent": 1,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Photoroom",
+        "Deputy"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photos"
+      ]
+    },
+    {
+      "term": "ai product photos free",
+      "score": 5.8,
+      "specificity": 0.8,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 6,
+      "hn_points": 62,
+      "commercial_intent": 1,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Photoroom",
+        "Deputy"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photos free"
+      ]
+    },
+    {
+      "term": "photography setup",
+      "score": 5.2,
+      "specificity": 0.9,
+      "demand_count": 5.0,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 8,
+      "hn_points": 521,
+      "commercial_intent": 0,
+      "best_program": "Tone Caliper",
+      "best_rate": 20.0,
+      "programs": [
+        "Tone Caliper"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "ai product photoshoot prompt",
+      "score": 5.2,
+      "specificity": 0.95,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 3,
+      "commercial_intent": 2,
+      "best_program": "BuyPromptPack",
+      "best_rate": 30.0,
+      "programs": [
+        "BuyPromptPack",
+        "ProductScope",
+        "Deputy"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photoshoot prompt"
+      ]
+    },
+    {
+      "term": "sell shopify",
+      "score": 5.0,
+      "specificity": 0.6,
+      "demand_count": 10.0,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 8,
+      "hn_points": 384,
+      "commercial_intent": 0,
+      "best_program": "Sellfy",
+      "best_rate": 40.0,
+      "programs": [
+        "Sellfy",
+        "Rokt Aftersell",
+        "CSV SafeCheck"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "ai product photoshoot free",
+      "score": 5.0,
+      "specificity": 0.88,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 13,
+      "commercial_intent": 2,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Relentless Nature"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photoshoot free"
+      ]
+    },
+    {
+      "term": "etsy seo guide",
+      "score": 4.7,
+      "specificity": 0.75,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 3,
+      "hn_points": 18,
+      "commercial_intent": 1,
+      "best_program": "Surfer SEO",
+      "best_rate": 125.0,
+      "programs": [
+        "Surfer SEO",
+        "OmniSEO",
+        "Koala AI"
+      ],
+      "trending_now": false,
+      "sample": [
+        "etsy seo guide"
+      ]
+    },
+    {
+      "term": "ai product photoshoot generator free",
+      "score": 4.6,
+      "specificity": 0.92,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 1,
+      "commercial_intent": 2,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Relentless Nature"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photoshoot generator free"
+      ]
+    },
+    {
+      "term": "sell on shopify or amazon",
+      "score": 4.6,
+      "specificity": 0.7,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 8,
+      "hn_points": 404,
+      "commercial_intent": 0,
+      "best_program": "Sellfy",
+      "best_rate": 40.0,
+      "programs": [
+        "Sellfy",
+        "Rokt Aftersell",
+        "Koala AI"
+      ],
+      "trending_now": false,
+      "sample": [
+        "sell on shopify or amazon"
+      ]
+    },
+    {
+      "term": "sell on shopify for free",
+      "score": 4.5,
+      "specificity": 0.7,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 5,
+      "hn_points": 429,
+      "commercial_intent": 0,
+      "best_program": "Sellfy",
+      "best_rate": 40.0,
+      "programs": [
+        "Sellfy",
+        "Rokt Aftersell",
+        "CSV SafeCheck"
+      ],
+      "trending_now": false,
+      "sample": [
+        "sell on shopify for free"
+      ]
+    },
+    {
+      "term": "sell on shopify",
+      "score": 4.0,
+      "specificity": 0.6,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 6,
+      "hn_points": 408,
+      "commercial_intent": 0,
+      "best_program": "Sellfy",
+      "best_rate": 40.0,
+      "programs": [
+        "Sellfy",
+        "Rokt Aftersell",
+        "CSV SafeCheck"
+      ],
+      "trending_now": false,
+      "sample": [
+        "sell on shopify"
+      ]
+    },
+    {
+      "term": "product photography near me",
+      "score": 3.9,
+      "specificity": 0.9,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 17,
+      "commercial_intent": 1,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Relentless Nature"
+      ],
+      "trending_now": false,
+      "sample": [
+        "product photography near me"
+      ]
+    },
+    {
+      "term": "ai product photos reddit",
+      "score": 3.5,
+      "specificity": 0.8,
+      "demand_count": 4,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 8,
+      "commercial_intent": 1,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Photoroom",
+        "Deputy"
+      ],
+      "trending_now": false,
+      "sample": [
+        "ai product photos reddit"
+      ]
+    },
+    {
+      "term": "sell on shopify uk",
+      "score": 3.4,
+      "specificity": 0.8,
+      "demand_count": 3,
+      "sources": [
+        "autocomplete"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 4,
+      "hn_points": 2,
+      "commercial_intent": 0,
+      "best_program": "Sellfy",
+      "best_rate": 40.0,
+      "programs": [
+        "Sellfy",
+        "Rokt Aftersell",
+        "CSV SafeCheck"
+      ],
+      "trending_now": false,
+      "sample": [
+        "sell on shopify uk"
+      ]
+    },
+    {
+      "term": "shopify free",
+      "score": 3.4,
+      "specificity": 0.6,
+      "demand_count": 3.0,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 8,
+      "hn_points": 424,
+      "commercial_intent": 0,
+      "best_program": "CSV SafeCheck",
+      "best_rate": 10.0,
+      "programs": [
+        "CSV SafeCheck",
+        "Pinecone",
+        "Adwisely"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "photography near",
+      "score": 3.1,
+      "specificity": 0.9,
+      "demand_count": 2.5,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": null,
+      "wiki_views": null,
+      "news_count": 1,
+      "hn_points": 246,
+      "commercial_intent": 0,
+      "best_program": "Linear",
+      "best_rate": 0.0,
+      "programs": [
+        "Linear",
+        "Tone Caliper"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "photography",
+      "score": 2.0,
+      "specificity": 0.15,
+      "demand_count": 11.4,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 5.08,
+      "wiki_views": 469896,
+      "news_count": 11,
+      "hn_points": 6547,
+      "commercial_intent": 0,
+      "best_program": "Tone Caliper",
+      "best_rate": 20.0,
+      "programs": [
+        "Tone Caliper"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "setup",
+      "score": 0.4,
+      "specificity": 0.15,
+      "demand_count": 3.0,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.24,
+      "wiki_views": 2158,
+      "news_count": 11,
+      "hn_points": 9701,
+      "commercial_intent": 0,
+      "best_program": "Framer",
+      "best_rate": 50.0,
+      "programs": [
+        "Framer",
+        "Heard",
+        "Turbotic"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "photoshoot",
+      "score": 0.4,
+      "specificity": 0.15,
+      "demand_count": 2.1,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.4,
+      "wiki_views": 869,
+      "news_count": 5,
+      "hn_points": 173,
+      "commercial_intent": 1,
+      "best_program": "",
+      "best_rate": 0.0,
+      "programs": [],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "product",
+      "score": 0.3,
+      "specificity": 0.02,
+      "demand_count": 18.9,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 2.28,
+      "wiki_views": 10929,
+      "news_count": 10,
+      "hn_points": 26980,
+      "commercial_intent": 0,
+      "best_program": "ProductScope",
+      "best_rate": 30.0,
+      "programs": [
+        "ProductScope",
+        "Deputy",
+        "Relentless Nature"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "near",
+      "score": 0.3,
+      "specificity": 0.15,
+      "demand_count": 3.0,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.36,
+      "wiki_views": 2141,
+      "news_count": 4,
+      "hn_points": 21451,
+      "commercial_intent": 0,
+      "best_program": "Linear",
+      "best_rate": 0.0,
+      "programs": [
+        "Linear",
+        "Passpack"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "etsy",
+      "score": 0.1,
+      "specificity": 0.02,
+      "demand_count": 9.6,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.41,
+      "wiki_views": 199254,
+      "news_count": 12,
+      "hn_points": 6265,
+      "commercial_intent": 0,
+      "best_program": "",
+      "best_rate": 0.0,
+      "programs": [],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "shopify",
+      "score": 0.1,
+      "specificity": 0.02,
+      "demand_count": 8.1,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.47,
+      "wiki_views": 273996,
+      "news_count": 13,
+      "hn_points": 10707,
+      "commercial_intent": 0,
+      "best_program": "CSV SafeCheck",
+      "best_rate": 10.0,
+      "programs": [
+        "CSV SafeCheck",
+        "Pinecone",
+        "Adwisely"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "sell",
+      "score": 0.1,
+      "specificity": 0.02,
+      "demand_count": 6.6,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.64,
+      "wiki_views": 927,
+      "news_count": 5,
+      "hn_points": 26859,
+      "commercial_intent": 0,
+      "best_program": "Sellfy",
+      "best_rate": 40.0,
+      "programs": [
+        "Sellfy",
+        "Rokt Aftersell",
+        "GetResponse"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "photos",
+      "score": 0.1,
+      "specificity": 0.02,
+      "demand_count": 3.0,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.59,
+      "wiki_views": 5289,
+      "news_count": 6,
+      "hn_points": 22855,
+      "commercial_intent": 0,
+      "best_program": "Photoroom",
+      "best_rate": 20.0,
+      "programs": [
+        "Photoroom",
+        "Freepik",
+        "ProductScope"
+      ],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "reddit",
+      "score": 0.1,
+      "specificity": 0.02,
+      "demand_count": 2.6999999999999997,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.62,
+      "wiki_views": 1538369,
+      "news_count": 13,
+      "hn_points": 25560,
+      "commercial_intent": 0,
+      "best_program": "",
+      "best_rate": 0.0,
+      "programs": [],
+      "trending_now": false,
+      "sample": []
+    },
+    {
+      "term": "free",
+      "score": 0.0,
+      "specificity": 0.02,
+      "demand_count": 3.5999999999999996,
+      "sources": [
+        "phrase"
+      ],
+      "wiki_growth": 0.54,
+      "wiki_views": 17030,
+      "news_count": 6,
+      "hn_points": 33668,
+      "commercial_intent": 0,
+      "best_program": "",
+      "best_rate": 0.0,
+      "programs": [],
+      "trending_now": false,
+      "sample": []
+    }
+  ],
+  "signals": {},
+  "niches": [
+    {
+      "niche": "Etsy SEO Optimization",
+      "why_it_works": "High search demand and strong commercial intent for Etsy SEO tools and guides, with significant Hacker News engagement indicating active interest.",
+      "demand_evidence": "Terms like 'etsy seo' (demand: 16.5, score: 11.5), 'etsy seo tools' (demand: 4, score: 7.0), 'etsy seo tips' (demand: 5, score: 6.3), and 'etsy seo generator' (hn_points: 600) show consistent demand.",
+      "monetisation": "Surfer SEO affiliate program (commission rate: $125).",
+      "difficulty": "medium",
+      "first_content": "Ultimate Guide to Etsy SEO: Tools and Tips to Boost Your Listings",
+      "risk": "Over-saturation of generic SEO content; differentiation is critical."
+    },
+    {
+      "niche": "AI-Powered Product Photography",
+      "why_it_works": "Growing interest in AI tools for product photography, especially among Etsy sellers, with high engagement on Hacker News for related terms.",
+      "demand_evidence": "Terms like 'ai product photoshoot' (demand: 4, score: 7.3, hn_points: 341), 'ai product photos' (demand: 4, score: 5.8), and 'ai product photos on etsy' (demand: 2, score: 6.6) indicate strong niche demand.",
+      "monetisation": "ProductScope affiliate program (commission rate: $30). BuyPromptPack for AI prompts (commission rate: $30).",
+      "difficulty": "medium",
+      "first_content": "How to Use AI for Professional Product Photos: A Step-by-Step Guide",
+      "risk": "Rapidly evolving AI tools may render content outdated quickly."
+    },
+    {
+      "niche": "Product Photography for E-Commerce",
+      "why_it_works": "Broad demand for product photography skills and setups, with consistent search volume and news mentions, indicating a stable market.",
+      "demand_evidence": "Terms like 'product photography' (demand: 21.5, score: 8.2), 'product photography setup' (demand: 4, score: 6.8, hn_points: 532), and 'product photos' (demand: 5, score: 6.1).",
+      "monetisation": "ProductScope affiliate program (commission rate: $30). Tone Caliper for photography tools (commission rate: $20).",
+      "difficulty": "low",
+      "first_content": "DIY Product Photography Setup: Affordable Tools and Techniques",
+      "risk": "Competition from established photography blogs and YouTube channels."
+    },
+    {
+      "niche": "Selling on Shopify",
+      "why_it_works": "High search volume and commercial intent for Shopify-related queries, with strong Hacker News engagement and news coverage.",
+      "demand_evidence": "Terms like 'sell shopify' (demand: 10, score: 5.0, hn_points: 384), 'sell on shopify or amazon' (demand: 3, hn_points: 404), and 'sell on shopify for free' (demand: 4, hn_points: 429).",
+      "monetisation": "Sellfy affiliate program (commission rate: $40). CSV SafeCheck for Shopify tools (commission rate: $10).",
+      "difficulty": "medium",
+      "first_content": "Shopify vs. Amazon: Where Should You Sell in 2024?",
+      "risk": "Shopify\u2019s frequent updates and policy changes may require constant content updates."
+    },
+    {
+      "niche": "Free AI Tools for E-Commerce",
+      "why_it_works": "Strong interest in free AI tools for product photography and SEO, with high Hacker News engagement and commercial intent.",
+      "demand_evidence": "Terms like 'etsy seo tools free' (demand: 4, score: 7.8, hn_points: 138), 'ai product photoshoot free' (demand: 3, score: 5.0), and 'ai product photos free' (demand: 3, score: 5.8).",
+      "monetisation": "ProductScope (free tier promotions), Surfer SEO (free tools or trials), and BuyPromptPack (free prompts).",
+      "difficulty": "low",
+      "first_content": "Top Free AI Tools for Etsy Sellers in 2024",
+      "risk": "Free tools may have limited monetization potential or short-lived popularity."
+    },
+    {
+      "niche": "Photography Setup and Gear",
+      "why_it_works": "Consistent demand for photography setups and gear, with high Hacker News engagement and broad news coverage.",
+      "demand_evidence": "Terms like 'photography setup' (demand: 5, score: 5.2, hn_points: 521), 'product photography setup' (demand: 4, score: 6.8), and 'photography' (demand: 11.4, wiki_growth: 5.08).",
+      "monetisation": "Tone Caliper affiliate program (commission rate: $20). Linear for photography tools (commission rate: $0, but potential for other partnerships).",
+      "difficulty": "medium",
+      "first_content": "Best Budget-Friendly Photography Setups for Beginners",
+      "risk": "High competition from established photography gear review sites."
+    }
+  ]
+}

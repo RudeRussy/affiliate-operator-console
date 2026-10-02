@@ -1,0 +1,46 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run test suite
+        run: pytest tests/ -q
+
+      - name: Start console and check it serves
+        run: |
+          # the console is the app; prove it actually boots and serves a page
+          python -m uvicorn console.app:app --host 127.0.0.1 --port 8790 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8790/ >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8790/ >/dev/null
+          echo "console served OK"
+
+      - name: Start tracker and check health
+        run: |
+          python -m uvicorn tracker.app:app --host 127.0.0.1 --port 8788 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8788/healthz >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8788/healthz >/dev/null
+          echo "tracker healthy OK"

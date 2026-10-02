@@ -1,0 +1,11 @@
+Disclosure: this video contains affiliate links. If you buy through them I may earn a commission at no extra cost to you. I only recommend tools I have actually used. As an affiliate I earn from qualifying purchases.
+
+Running Stable Diffusion locally on an Apple Silicon Mac is easier than you think. In this video, I walk through the exact setup I use on my 64GB Mac Studio, using a free app called DiffusionBee. It bundles Stable Diffusion models, including SDXL, into a simple interface—no Python, no command line, no subscription fees.
+
+I've been using DiffusionBee for my own AI image generation, and it handles everything from basic prompts to advanced features like negative prompts and inpainting. Because it runs locally, your prompts and images stay on your machine, and you can generate unlimited images even offline.
+
+If you want to try it yourself, you can download DiffusionBee for free here: https://example.com/aff/diffusionbee?sub1=TEST
+
+It's the fastest way I've found to get started with Stable Diffusion on Mac. If this video helped you, please give it a thumbs up and subscribe for more local AI tutorials.
+
+#ad #affiliate

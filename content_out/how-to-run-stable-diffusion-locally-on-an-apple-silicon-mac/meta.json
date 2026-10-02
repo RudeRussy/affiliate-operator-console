@@ -1,0 +1,10 @@
+{
+  "topic": "How to run Stable Diffusion locally on an Apple Silicon Mac",
+  "offer": "DiffusionBee (free local SD app for Mac)",
+  "aff_url": "https://example.com/aff/diffusionbee?sub1=TEST",
+  "provider": "ollama-local",
+  "model": "deepseek-v4-pro:cloud",
+  "ts": 1790938409,
+  "disclosure": "Disclosure: this video contains affiliate links. If you buy through them I may earn a commission at no extra cost to you. I only recommend tools I have actually used. As an affiliate I earn from qualifying purchases.",
+  "synthetic": true
+}

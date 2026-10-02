@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Operator Console</title>
+<style>
+  :root{
+    --bg:#1c1c1e; --bg2:#2c2c2e; --bg3:#3a3a3c; --sidebar:rgba(38,38,40,.72);
+    --line:rgba(255,255,255,.08); --txt:#f2f2f7; --dim:#98989d; --dim2:#636366;
+    --blue:#0a84ff; --green:#30d158; --orange:#ff9f0a; --red:#ff453a; --purple:#bf5af2;
+    --radius:10px;
+    --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow-x:hidden}
+  body{background:var(--bg);color:var(--txt);font:13px/1.45 var(--font);
+    -webkit-font-smoothing:antialiased;overflow:hidden;padding:0}
+
+  /* ---- window frame ---- */
+  .window{position:fixed;inset:0;display:flex;flex-direction:column;
+    background:var(--bg);overflow:hidden}
+  .titlebar{height:auto;min-height:calc(52px + env(safe-area-inset-top));flex:0 0 auto;display:flex;align-items:center;gap:14px;
+    padding:env(safe-area-inset-top) 16px 0;background:var(--bg2);border-bottom:1px solid var(--line);
+    -webkit-app-region:drag;user-select:none}
+  .lights{display:flex;gap:8px;flex:0 0 auto}
+  .light{width:12px;height:12px;border-radius:50%}
+  .light.r{background:#ff5f57}.light.y{background:#febc2e}.light.g{background:#28c840}
+  .tb-title{font-weight:600;font-size:13.5px;flex:1;text-align:center;
+    color:var(--dim);letter-spacing:.2px}
+  .tb-right{flex:0 0 auto;display:flex;gap:8px;align-items:center}
+  .badge{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--bg3);
+    color:var(--dim);border:1px solid var(--line);white-space:nowrap}
+  .badge.ok{color:var(--green);border-color:rgba(48,209,88,.35)}
+  .badge.warn{color:var(--orange);border-color:rgba(255,159,10,.35)}
+  .badge.danger{color:var(--red);border-color:rgba(255,69,58,.35)}
+
+  .body{flex:1;display:flex;overflow:hidden}
+
+  /* ---- sidebar ---- */
+  .sidebar{width:216px;flex:0 0 216px;background:var(--sidebar);border-right:1px solid var(--line);
+    padding:10px 8px;overflow-y:auto;backdrop-filter:blur(30px)}
+  .navitem{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:7px;
+    color:var(--txt);cursor:pointer;font-size:13px;margin-bottom:2px}
+  .navitem:hover{background:rgba(255,255,255,.06)}
+  .navitem.active{background:var(--blue);color:#fff}
+  .navitem .ic{width:17px;text-align:center;font-size:14px}
+  .sidebar .sep{height:1px;background:var(--line);margin:8px 4px}
+  .sidelabel{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;
+    color:var(--dim2);padding:8px 10px 4px}
+
+  /* ---- mobile bottom tab bar ---- */
+  .bottombar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;
+    height:auto;min-height:calc(56px + env(safe-area-inset-bottom));
+    padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    background:var(--sidebar);border-top:1px solid var(--line);backdrop-filter:blur(30px);
+    overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;user-select:none}
+  .bottombar::-webkit-scrollbar{display:none}
+  .bottombar .navitem{flex:0 0 auto;flex-direction:column;justify-content:center;align-items:center;
+    gap:2px;min-width:68px;min-height:44px;padding:6px 8px;font-size:10px;text-align:center;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:0;border-radius:8px}
+  .bottombar .navitem .ic{width:auto;font-size:17px}
+
+  /* ---- main ---- */
+  .main{flex:1;overflow-y:auto;overflow-x:hidden;padding:22px 26px 60px}
+  .view{display:none;max-width:900px;margin:0 auto;animation:fade .18s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  h1{font-size:24px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
+  .sub{color:var(--dim);margin-bottom:20px;font-size:13.5px}
+
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin-bottom:14px}
+  .card h2{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--dim);
+    font-weight:600;margin-bottom:12px}
+
+  .btn{background:var(--blue);color:#fff;border:0;padding:7px 14px;border-radius:7px;
+    font-weight:590;cursor:pointer;font-size:12.5px;font-family:var(--font);min-height:32px}
+  .btn:hover{filter:brightness(1.1)}
+  .btn.sec{background:var(--bg3);color:var(--txt)}
+  .btn.small{padding:5px 10px;font-size:12px}
+  .btn:disabled{opacity:.45;cursor:default}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+  input,select,textarea{background:var(--bg);border:1px solid var(--line);color:var(--txt);
+    padding:7px 10px;border-radius:7px;width:100%;font-size:12.5px;font-family:var(--font);
+    outline:none;min-height:32px}
+  input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+  label{font-size:11.5px;color:var(--dim);display:block;margin:12px 0 5px;font-weight:500}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+
+  .bar{height:7px;background:var(--bg3);border-radius:5px;overflow:hidden;margin:9px 0}
+  .bar>i{display:block;height:100%;border-radius:5px;
+    background:linear-gradient(90deg,var(--blue),var(--green));transition:width .4s}
+
+  .task{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .task:last-child{border-bottom:0}
+  .task input{width:16px;height:16px;margin-top:2px;accent-color:var(--green);
+    cursor:pointer;flex:0 0 auto}
+  .task.done .t-title{opacity:.5;text-decoration:line-through}
+  .t-phase{font-size:10.5px;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;
+    font-weight:600}
+  .t-title{font-weight:600;margin-top:1px;font-size:13.5px}
+  .t-detail{color:var(--dim);margin-top:6px;font-size:12.5px;white-space:pre-wrap;line-height:1.55}
+  .t-tools{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+  code{background:var(--bg);padding:2px 7px;border-radius:5px;font-size:11.5px;
+    color:#64d2ff;font-family:var(--mono);border:1px solid var(--line);
+    word-break:break-word;overflow-wrap:anywhere}
+
+  .metric{display:flex;justify-content:space-between;align-items:baseline;
+    padding:9px 0;border-bottom:1px solid var(--line)}
+  .metric:last-child{border-bottom:0}
+  .metric b{font-size:19px;font-weight:700;letter-spacing:-.3px}
+  .metric span{color:var(--dim);font-size:12.5px}
+
+  .g{padding:12px 14px;border-radius:9px;margin-bottom:9px;font-size:12.5px;
+    border-left:3px solid var(--orange);background:rgba(255,159,10,.09)}
+  .g.danger{border-color:var(--red);background:rgba(255,69,58,.1)}
+  .g.info{border-color:var(--blue);background:rgba(10,132,255,.08)}
+  .g b{font-weight:600;display:block}
+  .g .fix{color:var(--dim);margin-top:5px;line-height:1.5}
+
+  .ms{display:flex;gap:11px;align-items:flex-start;padding:8px 0;font-size:12.5px}
+  .ms .dot{width:9px;height:9px;border-radius:50%;background:var(--bg3);
+    border:1.5px solid var(--dim2);flex:0 0 auto;margin-top:5px}
+  .ms.hit .dot{background:var(--green);border-color:var(--green)}
+  .ms.hit .ms-l{opacity:.85}
+
+  #chat{max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:9px;
+    margin-bottom:10px}
+  .msg{padding:10px 13px;border-radius:10px;background:var(--bg3);font-size:12.5px;
+    white-space:pre-wrap;line-height:1.55;max-width:88%;word-break:break-word;overflow-wrap:anywhere}
+  .msg.me{background:rgba(10,132,255,.22);align-self:flex-end}
+  .muted{color:var(--dim);font-size:12px}
+  .mono{font-family:var(--mono);font-size:11.5px;word-break:break-word;overflow-wrap:anywhere}
+
+  .listitem{display:flex;justify-content:space-between;align-items:center;gap:10px;
+    padding:11px 0;border-bottom:1px solid var(--line)}
+  .listitem:last-child{border-bottom:0}
+  .listitem > div{min-width:0}
+  .listitem .lt{font-weight:560;word-break:break-word;overflow-wrap:anywhere}
+  .pill{font-size:10.5px;padding:2px 8px;border-radius:20px;background:var(--bg3);
+    color:var(--dim);border:1px solid var(--line)}
+  .pill.run{color:var(--blue);border-color:rgba(10,132,255,.4)}
+  .pill.done{color:var(--green);border-color:rgba(48,209,88,.4)}
+  .pill.failed{color:var(--red);border-color:rgba(255,69,58,.4)}
+
+  pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:13px;
+    overflow:auto;max-height:420px;font-family:var(--mono);font-size:11.5px;
+    white-space:pre-wrap;line-height:1.55;color:#d1d1d6;
+    word-break:break-word;overflow-wrap:anywhere}
+  .empty{text-align:center;color:var(--dim2);padding:34px 10px;font-size:12.5px}
+
+  /* ---- responsive layout ---- */
+  @media (min-width: 900px){
+    .sidebar{width:216px;flex:0 0 216px;display:flex}
+    .main{padding:22px 26px 60px}
+    .view{max-width:900px;margin:0 auto}
+    .bottombar{display:none}
+  }
+
+  @media (max-width: 899px) and (min-width: 600px){
+    .sidebar{width:170px;flex:0 0 170px;padding:10px 6px}
+    .main{padding:18px 18px 60px}
+    .navitem{padding:7px 8px;font-size:12px}
+    .bottombar{display:none}
+  }
+
+  @media (max-width: 599px){
+    .sidebar{display:none}
+    .main{padding:16px 14px calc(92px + env(safe-area-inset-bottom))}
+    .bottombar{display:flex}
+    h1{font-size:20px}
+    .sub{font-size:12.5px}
+    .card{padding:14px}
+    .btn,.btn.small,input,select,textarea{min-height:44px;font-size:13px}
+    .row{flex-wrap:wrap !important}
+    .listitem{flex-wrap:wrap;gap:8px 0}
+    .listitem .row{flex:1 1 100%;justify-content:flex-start}
+    .tb-title{font-size:12px}
+    .badge{font-size:10px;padding:2px 6px}
+    .light{width:10px;height:10px}
+    .task{gap:10px}
+  }
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <div class="lights"><span class="light r"></span><span class="light y"></span><span class="light g"></span></div>
+    <div class="tb-title">Operator Console</div>
+    <div class="tb-right">
+      <span class="badge" id="bd-path">no path</span>
+      <span class="badge" id="bd-niche">no niche</span>
+      <span class="badge" id="bd-guard">—</span>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="sidebar">
+      <div class="navitem active" data-v="guide"><span class="ic">🧭</span> Guide</div>
+      <div class="navitem" data-v="copilot"><span class="ic">💬</span> Co-pilot</div>
+      <div class="sep"></div>
+      <div class="sidelabel">Build</div>
+      <div class="navitem" data-v="content"><span class="ic">🎬</span> Content Studio</div>
+      <div class="navitem" data-v="niche"><span class="ic">🔬</span> Niche Lab</div>
+      <div class="navitem" data-v="programs"><span class="ic">🔎</span> Programs</div>
+      <div class="navitem" data-v="service"><span class="ic">💼</span> Service Kit</div>
+      <div class="navitem" data-v="outreach"><span class="ic">📨</span> Outreach</div>
+      <div class="navitem" data-v="tracker"><span class="ic">📊</span> Tracker</div>
+      <div class="sep"></div>
+      <div class="sidelabel">Ops</div>
+      <div class="navitem" data-v="jobs"><span class="ic">⚙️</span> Jobs &amp; Audits</div>
+      <div class="navitem" data-v="setup"><span class="ic">⚙︎</span> Setup</div>
+      <div class="navitem" data-v="plan"><span class="ic">📄</span> Master Plan</div>
+    </div>
+
+    <div class="main">
+
+      <!-- ============ GUIDE ============ -->
+      <div class="view active" id="v-guide">
+        <h1>Your next actions</h1>
+        <div class="sub" id="guideSub">Tell me where you are and I'll tell you exactly what to do.</div>
+
+        <div class="card">
+          <h2>Progress</h2>
+          <div class="muted" id="progressText">loading…</div>
+          <div class="bar"><i id="progressBar"></i></div>
+        </div>
+
+        <div class="card">
+          <h2>Guardrails</h2>
+          <div id="guardrails"></div>
+        </div>
+
+        <div class="card">
+          <h2>Do these next</h2>
+          <div id="tasks"></div>
+        </div>
+
+        <div class="card">
+          <h2>Milestones</h2>
+          <div id="milestones"></div>
+        </div>
+      </div>
+
+      <!-- ============ COPILOT ============ -->
+      <div class="view" id="v-copilot">
+        <h1>Co-pilot</h1>
+        <div class="sub">Knows your tasks, metrics and guardrails. Ask it anything — especially "what do I do next?"</div>
+        <div class="card">
+          <div id="chat"></div>
+          <div class="row" style="flex-wrap:nowrap">
+            <input id="q" placeholder="What do I do next?" onkeydown="if(event.key==='Enter')ask()">
+            <button class="btn" onclick="ask()">Ask</button>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <button class="btn sec small" onclick="quick('What do I do next?')">Next step</button>
+            <button class="btn sec small" onclick="quick('I have no money and no audience. Reality check my plan.')">Reality check</button>
+            <button class="btn sec small" onclick="quick('How do I get my first paying client this week?')">First client</button>
+            <button class="btn sec small" onclick="quick('What are my biggest risks right now?')">My risks</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ CONTENT STUDIO ============ -->
+      <div class="view" id="v-content">
+        <h1>Content Studio</h1>
+        <div class="sub">Turn a topic + offer into a full video pack — script, description with compliant disclosure, scenes and image prompts.</div>
+        <div class="card">
+          <h2>Generate a pack</h2>
+          <label>Topic / search intent</label>
+          <input id="c-topic" placeholder="How to run Stable Diffusion locally on an Apple Silicon Mac">
+          <label>Offer you're promoting</label>
+          <input id="c-offer" placeholder="DiffusionBee">
+          <label>Affiliate link</label>
+          <input id="c-url" placeholder="https://your-affiliate-link?sub1=REPLACE">
+          <label>Model</label>
+          <select id="c-model"></select>
+          <div class="row" style="margin-top:14px">
+            <button class="btn" onclick="genContent()">Generate pack</button>
+            <span class="muted" id="c-status"></span>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Build pipeline</h2>
+          <div class="muted" style="margin-bottom:10px">Take a pack all the way: render its images, make a tracked bridge page, and cut platform-ready bundles.</div>
+          <label>Pack</label>
+          <select id="b-pack"></select>
+          <label>Offer name</label>
+          <input id="b-offer" placeholder="Photoroom">
+          <label>Affiliate link (your raw merchant URL)</label>
+          <input id="b-url" placeholder="https://www.photoroom.com/?ref=YOURID">
+          <div class="row" style="margin-top:14px">
+            <button class="btn sec" onclick="buildRender()">Render images</button>
+            <button class="btn sec" onclick="buildBridge()">Bridge page</button>
+            <button class="btn" onclick="buildPublish()">Publish bundles</button>
+            <span class="muted" id="b-status"></span>
+          </div>
+          <div class="muted" style="margin-top:8px">Renders queue behind any ComfyUI work already running. Every link is rewritten to the tracker so clicks are attributable.</div>
+        </div>
+        <div class="card">
+          <h2>Packs</h2>
+          <div id="packs"></div>
+        </div>
+      </div>
+
+      <!-- ============ NICHE LAB ============ -->
+      <div class="view" id="v-niche">
+        <h1>Niche Lab</h1>
+        <div class="sub">Finds niches that are actually trending <em>and</em> worth money. Gathers real signals — search autocomplete (what people actually type), Google Trends, Wikipedia interest, Hacker News, news volume — then cross-references live commission data. Every number is measured, not invented.</div>
+        <div class="card">
+          <h2>Research niches</h2>
+          <label>Seed topics (comma separated)</label>
+          <input id="n-seeds" placeholder="ai product photos, etsy seo, sell on shopify">
+          <label>Region</label>
+          <select id="n-geo">
+            <option value="GB" selected>United Kingdom</option>
+            <option value="US">United States</option>
+            <option value="AU">Australia</option>
+            <option value="CA">Canada</option>
+          </select>
+          <label>Synthesise with an LLM (slower, groups terms into named niches)</label>
+          <select id="n-model">
+            <option value="">— no synthesis, raw signals only (fast) —</option>
+          </select>
+          <div class="row" style="margin-top:14px">
+            <button class="btn" onclick="runNiche()">Research</button>
+            <button class="btn sec" onclick="loadNiches()">Refresh results</button>
+            <span class="muted" id="n-status"></span>
+          </div>
+          <div class="muted" style="margin-top:8px">Scoring is deliberately multiplicative: high demand alone can't win. A generic word like "product" scores near zero because it has no specificity and no program behind it.</div>
+        </div>
+        <div class="card">
+          <h2>Recommended niches</h2>
+          <div id="n-niches"><div class="muted">No research run yet.</div></div>
+        </div>
+        <div class="card">
+          <h2>Raw candidates</h2>
+          <div id="n-cands"><div class="muted">No research run yet.</div></div>
+        </div>
+      </div>
+
+      <!-- ============ PROGRAMS ============ -->
+      <div class="view" id="v-programs">
+        <h1>Programs</h1>
+        <div class="sub">Live affiliate program data — real commission rates, cookie windows, networks and approval difficulty. Ranked for a zero-budget beginner (recurring &gt; one-off, long cookie, instant approval).</div>
+        <div class="card">
+          <h2>Find programs</h2>
+          <div class="row" style="flex-wrap:nowrap">
+            <input id="pg-q" placeholder="AI video, email marketing, ecommerce, project management…" onkeydown="if(event.key==='Enter')findPrograms()">
+            <button class="btn" onclick="findPrograms()">Search</button>
+          </div>
+          <div class="row" style="margin-top:9px">
+            <button class="btn sec small" onclick="pg('AI video')">AI video</button>
+            <button class="btn sec small" onclick="pg('email marketing')">Email</button>
+            <button class="btn sec small" onclick="pg('ecommerce')">Ecommerce</button>
+            <button class="btn sec small" onclick="pg('AI image')">AI image</button>
+          </div>
+          <div class="muted" style="margin-top:9px" id="pg-status"></div>
+        </div>
+        <div class="card">
+          <h2>Results</h2>
+          <div id="pg-results"><div class="empty">Search to see live program data.</div></div>
+        </div>
+      </div>
+
+      <!-- ============ OUTREACH ============ -->
+      <div class="view" id="v-outreach">
+        <h1>Outreach</h1>
+        <div class="sub">The money side. The Service Kit describes the offer — this tracks who you sent it to and refuses to let you spam. One "no" suppresses a lead permanently; daily caps stop accounts getting banned; cold email is blocked unless it carries your identity, a real address and an opt-out (UK PECR).</div>
+
+        <div class="card">
+          <h2>Pipeline</h2>
+          <div id="o-stats" class="muted">loading…</div>
+        </div>
+
+        <div class="card">
+          <h2>Add a lead</h2>
+          <div class="grid2">
+            <div><label>Name</label><input id="o-name" placeholder="Jane"></div>
+            <div><label>Business</label><input id="o-biz" placeholder="Copper Lane Jewellery"></div>
+            <div><label>Channel</label>
+              <select id="o-ch">
+                <option value="etsy">Etsy</option><option value="facebook">Facebook</option>
+                <option value="reddit">Reddit</option><option value="discord">Discord</option>
+                <option value="instagram">Instagram</option><option value="email">Email</option>
+              </select></div>
+            <div><label>Niche</label><input id="o-niche" placeholder="jewellery"></div>
+          </div>
+          <label>Handle / shop URL / email</label>
+          <input id="o-handle" placeholder="https://etsy.com/shop/copperlane">
+          <label style="display:flex;align-items:center;gap:8px;margin-top:10px">
+            <input type="checkbox" id="o-ltd" style="width:auto;margin:0">
+            <span>This lead is a UK <b>limited company</b> (blocks cold email — PECR corporate subscriber)</span>
+          </label>
+          <div class="row" style="margin-top:12px">
+            <button class="btn" onclick="addLead()">Add lead</button>
+            <span class="muted" id="o-add-status"></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Find leads</h2>
+          <div class="muted" style="margin-bottom:10px">Searches the web index for real UK seller shops in a niche, scores each one, and shows <b>why</b> it ranked. Companies are auto-flagged as limited — cold email to those is blocked by the compliance gate.</div>
+          <div class="row" style="align-items:flex-end;flex-wrap:wrap;gap:10px">
+            <div style="flex:1;min-width:180px"><label>Niche</label>
+              <input id="o-niche-find" value="handmade jewellery" list="niche-suggests">
+              <datalist id="niche-suggests">
+                <option value="handmade jewellery"><option value="ceramic mug">
+                <option value="hand poured candle"><option value="handmade baby clothes">
+                <option value="leather goods handmade"><option value="handmade homeware">
+                <option value="handmade soap"><option value="knitted accessories">
+              </datalist></div>
+            <div style="width:100px"><label>Location</label><input id="o-loc" value="UK"></div>
+            <div style="width:90px"><label>How many</label><input id="o-limit" type="number" value="12" min="1" max="20"></div>
+            <button class="btn" onclick="findLeads()">Find + import</button>
+            <span class="muted" id="o-find-status"></span>
+          </div>
+          <div id="o-find-results" style="margin-top:12px"></div>
+        </div>
+
+        <div class="card">
+          <h2>Leads</h2>
+          <div id="o-leads"></div>
+        </div>
+
+        <div class="card">
+          <h2>Due a follow-up</h2>
+          <div class="muted" style="margin-bottom:8px">Follow up on day 3, 7 and 14 — then stop. Never chase a fourth time, never chase someone who replied.</div>
+          <div id="o-due"></div>
+        </div>
+
+        <div class="card">
+          <h2>Draft</h2>
+          <div class="muted" style="margin-bottom:8px">Nothing sends automatically. This writes the message; you send it by hand and log it.</div>
+          <pre id="o-draft" class="mono" style="white-space:pre-wrap;font-size:.83rem;min-height:60px">Pick a lead below to draft a message.</pre>
+          <div id="o-blockers"></div>
+          <div id="o-caps" class="muted" style="margin-top:10px"></div>
+        </div>
+      </div>
+
+      <!-- ============ SERVICE KIT ============ -->
+      <div class="view" id="v-service">
+        <h1>Service Kit</h1>
+        <div class="sub">Your fastest path to money: sell your AI skills directly. Generates the offer, pricing, outreach scripts, proposal and delivery checklist.</div>
+        <div class="card">
+          <h2>Generate a kit</h2>
+          <label>Service</label>
+          <input id="s-service" placeholder="AI product photos and marketing video for online sellers">
+          <label>Target niche</label>
+          <input id="s-niche" placeholder="Etsy, Shopify and small-brand sellers of physical products">
+          <label>Price range</label>
+          <input id="s-price" value="£75-£400">
+          <label>Model</label>
+          <select id="s-model"></select>
+          <div class="row" style="margin-top:14px">
+            <button class="btn" onclick="genKit()">Generate kit</button>
+            <span class="muted" id="s-status"></span>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Kits</h2>
+          <div id="kits"></div>
+        </div>
+      </div>
+
+      <!-- ============ TRACKER ============ -->
+      <div class="view" id="v-tracker">
+        <h1>Tracker</h1>
+        <div class="sub">Which content actually earns. Log metrics here; the report ranks your creatives by commission-per-click.</div>
+        <div class="card">
+          <h2>Log</h2>
+          <div class="grid2">
+            <div><label>Metric</label>
+              <select id="m-kind">
+                <option value="content">Content published</option>
+                <option value="clicks">Clicks</option>
+                <option value="conversions">Conversions</option>
+                <option value="revenue">Revenue (£)</option>
+                <option value="outreach">Outreach sent</option>
+                <option value="clients">Clients won</option>
+              </select></div>
+            <div><label>Value</label><input id="m-value" type="number" value="1"></div>
+          </div>
+          <div class="row" style="margin-top:12px"><button class="btn" onclick="logMetric()">Log</button></div>
+        </div>
+        <div class="card">
+          <h2>Totals</h2>
+          <div id="metrics"></div>
+        </div>
+        <div class="card">
+          <h2>Tracker service</h2>
+          <div class="muted">Your click tracker runs separately (it's what the affiliate links point at):</div>
+          <div class="t-tools" style="margin-top:8px">
+            <code>./run.sh tracker</code><code>./run.sh seed</code><code>./run.sh report</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ JOBS ============ -->
+      <div class="view" id="v-jobs">
+        <h1>Jobs &amp; Audits</h1>
+        <div class="sub">Everything you generate should be audited before you use it. Code reviews and claim audits run on the big models.</div>
+        <div class="card">
+          <h2>Run</h2>
+          <div class="row">
+            <button class="btn sec" onclick="runReview()">Code review</button>
+            <button class="btn sec" onclick="runAudit()">Claims audit</button>
+            <button class="btn" onclick="runHarden()">Audit + fix copy</button>
+            <button class="btn sec" onclick="loadJobs()">Refresh</button>
+          </div>
+          <div class="muted" style="margin-top:9px">Claims audit targets the first service kit (or type a dir below). "Audit + fix copy" runs the audit then applies the safe rewrites (backs the kit up first).</div>
+          <input id="auditDir" placeholder="service_kit/<kit-folder>" style="margin-top:8px">
+        </div>
+        <div class="card">
+          <h2>Recent jobs</h2>
+          <div id="jobs"></div>
+        </div>
+        <div class="card">
+          <h2>Output</h2>
+          <pre id="jobOut">Select a job to see its output.</pre>
+        </div>
+      </div>
+
+      <!-- ============ SETUP ============ -->
+      <div class="view" id="v-setup">
+        <h1>Setup</h1>
+        <div class="sub">This drives everything — your tasks, guardrails and advice.</div>
+        <div class="card">
+          <label>What are you building?</label>
+          <select id="f-path"></select>
+          <label>Niche</label>
+          <select id="f-niche"></select>
+          <div class="grid2">
+            <div><label>Email list set up?</label>
+              <select id="f-email"><option value="false">No</option><option value="true">Yes</option></select></div>
+            <div><label>Using a link shortener?</label>
+              <select id="f-shortener"><option value="false">No</option><option value="true">Yes</option></select></div>
+          </div>
+          <label>Affiliate disclosure set?</label>
+          <select id="f-disc"><option value="false">No</option><option value="true">Yes</option></select>
+          <div class="row" style="margin-top:16px"><button class="btn" onclick="saveProfile()">Save</button></div>
+        </div>
+      </div>
+
+      <!-- ============ PLAN ============ -->
+      <div class="view" id="v-plan">
+        <h1>Master Plan</h1>
+        <div class="sub">The full strategy, runbook, compliance and failure modes.</div>
+        <div class="card">
+          <div class="row">
+            <a class="btn sec" href="http://127.0.0.1:8790/api/doc?base=service_kit" onclick="return false" style="display:none"></a>
+          </div>
+          <pre id="planText">loading…</pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Mobile: a horizontally-scrollable bottom tab bar. With 11 items, this keeps every section one thumb-tap away without nested menus, and respects the iOS safe-area inset. -->
+<div class="bottombar">
+  <div class="navitem active" data-v="guide"><span class="ic">🧭</span><span>Guide</span></div>
+  <div class="navitem" data-v="copilot"><span class="ic">💬</span><span>Co-pilot</span></div>
+  <div class="navitem" data-v="content"><span class="ic">🎬</span><span>Content</span></div>
+  <div class="navitem" data-v="niche"><span class="ic">🔬</span><span>Niche</span></div>
+  <div class="navitem" data-v="programs"><span class="ic">🔎</span><span>Programs</span></div>
+  <div class="navitem" data-v="service"><span class="ic">💼</span><span>Service</span></div>
+  <div class="navitem" data-v="outreach"><span class="ic">📨</span><span>Outreach</span></div>
+  <div class="navitem" data-v="tracker"><span class="ic">📊</span><span>Tracker</span></div>
+  <div class="navitem" data-v="jobs"><span class="ic">⚙️</span><span>Jobs</span></div>
+  <div class="navitem" data-v="setup"><span class="ic">⚙︎</span><span>Setup</span></div>
+  <div class="navitem" data-v="plan"><span class="ic">📄</span><span>Plan</span></div>
+</div>
+
+<script>
+let STATE=null, MODELS=[], ACTIVE_JOB=null;
+
+async function api(p,o){const r=await fetch(p,o);if(!r.ok)throw new Error(await r.text());return r.json();}
+const esc=s=>(s||"").replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+document.querySelectorAll('.navitem').forEach(n=>n.onclick=()=>{
+  document.querySelectorAll('.navitem').forEach(x=>x.classList.remove('active'));
+  n.classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('v-'+n.dataset.v).classList.add('active');
+  if(n.dataset.v==='jobs')loadJobs();
+  if(n.dataset.v==='plan')loadPlan();
+  if(n.dataset.v==='niche')loadNiches();
+  if(n.dataset.v==='outreach')loadOutreach();
+});
+
+async function load(){
+  STATE=await api('/api/state');
+  const p=STATE.profile||{};
+  document.getElementById('bd-path').textContent=p.path||'no path';
+  document.getElementById('bd-niche').textContent=p.niche||'no niche';
+  const g=STATE.guardrails||[];
+  const gb=document.getElementById('bd-guard');
+  gb.textContent=g.length?g.length+' alert'+(g.length>1?'s':''):'all clear';
+  gb.className='badge '+(g.some(x=>x.level==='danger')?'danger':g.length?'warn':'ok');
+
+  const pr=STATE.progress||{done:0,total:0,pct:0};
+  document.getElementById('progressText').textContent=
+    `${pr.done} of ${pr.total} tasks complete · ${pr.pct}%`;
+  document.getElementById('progressBar').style.width=pr.pct+'%';
+
+  document.getElementById('guardrails').innerHTML=g.length
+    ? g.map(w=>`<div class="g ${w.level}"><b>${esc(w.message)}</b><div class="fix">→ ${esc(w.fix)}</div></div>`).join('')
+    : '<div class="empty">None firing. Good.</div>';
+
+  const tds=document.getElementById('tasks');
+  const todo=STATE.tasks.filter(t=>!t.done), done=STATE.tasks.filter(t=>t.done);
+  tds.innerHTML=[...todo,...done].slice(0,22).map(t=>`
+    <div class="task ${t.done?'done':''}">
+      <input type="checkbox" ${t.done?'checked':''} onchange="toggle('${t.id}',this.checked)">
+      <div><div class="t-phase">${esc(t.phase)}</div><div class="t-title">${esc(t.title)}</div>
+      <div class="t-detail">${esc(t.detail)}</div>
+      ${(t.tools||[]).length?`<div class="t-tools">${t.tools.map(x=>`<code>${esc(x)}</code>`).join('')}</div>`:''}
+      </div></div>`).join('')||'<div class="empty">All done.</div>';
+
+  const m=STATE.metrics||{};
+  const rev=(m.revenue||{}).total||0,conv=(m.conversions||{}).total||0,
+        clk=(m.clicks||{}).total||0,cnt=(m.content||{}).total||0;
+  const val={revenue:rev,conversions:conv,clicks:clk,content:cnt};
+  document.getElementById('milestones').innerHTML=(STATE.milestones||[]).map(ms=>{
+    const hit=(val[ms.metric]||0)>=ms.target;
+    return `<div class="ms ${hit?'hit':''}"><span class="dot"></span>
+      <div class="ms-l"><div>${esc(ms.label)}</div>
+      <div class="muted">${esc(ms.when)} · ${esc(ms.income)}</div></div></div>`;}).join('');
+
+  const keys=['clicks','conversions','revenue','content','outreach','clients'];
+  document.getElementById('metrics').innerHTML=keys.map(k=>{
+    const v=(m[k]||{}).total||0;
+    return `<div class="metric"><span>${k}</span><b>${k==='revenue'?'£':''}${v}</b></div>`;}).join('');
+
+  const ps=document.getElementById('f-path');
+  if(!ps.options.length){for(const[k,v]of Object.entries(STATE.paths))ps.add(new Option(v,k));
+    for(const n of STATE.niches)document.getElementById('f-niche').add(new Option(n.name,n.id));}
+  if(p.path)ps.value=p.path;
+  if(p.niche)document.getElementById('f-niche').value=p.niche;
+  document.getElementById('f-email').value=String(!!p.has_email_list);
+  document.getElementById('f-shortener').value=String(!!p.uses_link_shortener);
+  document.getElementById('f-disc').value=String(p.has_disclosure!==false);
+}
+async function toggle(id,done){await api('/api/tasks/'+id+'/done',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({done})});await load();}
+async function saveProfile(){
+  await api('/api/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    path:document.getElementById('f-path').value,niche:document.getElementById('f-niche').value,
+    has_email_list:document.getElementById('f-email').value==='true',
+    uses_link_shortener:document.getElementById('f-shortener').value==='true',
+    has_disclosure:document.getElementById('f-disc').value==='true'})});
+  await load();
+}
+async function logMetric(){
+  await api('/api/metrics',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    kind:document.getElementById('m-kind').value,value:parseFloat(document.getElementById('m-value').value||0)})});
+  await load();
+}
+function quick(t){document.getElementById('q').value=t;ask();}
+async function ask(){
+  const q=document.getElementById('q').value.trim();if(!q)return;
+  const chat=document.getElementById('chat');
+  chat.innerHTML+=`<div class="msg me">${esc(q)}</div><div class="msg" id="think">thinking…</div>`;
+  document.getElementById('q').value='';chat.scrollTop=chat.scrollHeight;
+  try{const r=await api('/api/copilot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q})});
+    document.getElementById('think').textContent=r.answer;}
+  catch(e){document.getElementById('think').textContent='error: '+e.message;}
+  chat.scrollTop=chat.scrollHeight;
+}
+async function loadModels(){
+  MODELS=(await api('/api/models')).models;
+  for(const id of['c-model','s-model']){const s=document.getElementById(id);s.innerHTML=MODELS.map(m=>`<option>${m}</option>`).join('');}
+  const nm=document.getElementById('n-model');
+  if(nm)nm.innerHTML='<option value="">— no synthesis, raw signals only (fast) —</option>'
+    +MODELS.map(m=>`<option>${m}</option>`).join('');
+}
+async function genContent(){
+  const b={topic:document.getElementById('c-topic').value,offer:document.getElementById('c-offer').value,
+    aff_url:document.getElementById('c-url').value,model:document.getElementById('c-model').value};
+  if(!b.topic||!b.offer||!b.aff_url){document.getElementById('c-status').textContent='fill all fields';return;}
+  document.getElementById('c-status').textContent='generating…';
+  const r=await api('/api/jobs/content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+  pollJob(r.job_id,document.getElementById('c-status'),loadPacks);
+}
+async function genKit(){
+  const b={service:document.getElementById('s-service').value,niche:document.getElementById('s-niche').value,
+    price_range:document.getElementById('s-price').value,model:document.getElementById('s-model').value};
+  if(!b.service){document.getElementById('s-status').textContent='service required';return;}
+  document.getElementById('s-status').textContent='generating…';
+  const r=await api('/api/jobs/service-kit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+  pollJob(r.job_id,document.getElementById('s-status'),loadKits);
+}
+async function pollJob(id,el,after){
+  const i=setInterval(async()=>{
+    try{const j=await api('/api/jobs/'+id);
+      el.textContent=j.status+'…';
+      if(j.status!=='running'){clearInterval(i);el.textContent=j.status;if(after)after();}
+    }catch(e){clearInterval(i);el.textContent='error';}
+  },2500);
+}
+async function loadPacks(){
+  const d=await api('/api/content-packs');
+  document.getElementById('packs').innerHTML=d.packs.length?d.packs.map(p=>`
+    <div class="listitem"><div><div class="lt">${esc(p.title)}</div>
+    <div class="muted mono">${esc(p.dir)}</div></div>
+    <div class="row" style="flex-wrap:nowrap">${p.files.filter(f=>f.endsWith('.md')||f==='description.txt')
+      .map(f=>`<button class="btn sec small" onclick="viewDoc('content_out','${p.dir}','${f}')">${esc(f)}</button>`).join('')}</div>
+    </div>`).join(''):'<div class="empty">No packs yet. Generate one above.</div>';
+  // keep the build-pipeline dropdown in sync with the packs on disk
+  const sel=document.getElementById('b-pack');
+  if(sel){
+    const cur=sel.value;
+    sel.innerHTML=d.packs.map(p=>`<option value="${esc(p.dir)}">${esc(p.title)}</option>`).join('');
+    if(cur&&d.packs.some(p=>p.dir===cur))sel.value=cur;
+  }
+}
+async function loadKits(){
+  const d=await api('/api/service-kits');
+  document.getElementById('kits').innerHTML=d.kits.length?d.kits.map(k=>`
+    <div class="listitem"><div><div class="lt">${esc(k.dir)}</div></div>
+    <div class="row" style="flex-wrap:nowrap">${k.files.slice(0,6).map(f=>`<button class="btn sec small" onclick="viewDoc('service_kit','${k.dir}','${f}')">${esc(f.replace('.md',''))}</button>`).join('')}</div>
+    </div>`).join(''):'<div class="empty">No kits yet.</div>';
+}
+async function viewDoc(base,sub,file){
+  const d=await api(`/api/doc?base=${base}&sub=${encodeURIComponent(sub)}&file=${encodeURIComponent(file)}`);
+  document.getElementById('planText').textContent=d.content;
+  document.querySelectorAll('.navitem').forEach(x=>x.classList.remove('active'));
+  document.querySelector('[data-v="plan"]').classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('v-plan').classList.add('active');
+}
+async function loadPlan(){
+  try{const d=await api('/api/doc?base=service_kit&sub=..&file=..');}catch(e){}
+  const r=await fetch('/api/state');const s=await r.json();
+  document.getElementById('planText').textContent=
+`Operator Console — quick map
+
+GUIDE      → your tasks + guardrails + milestones
+CO-PILOT   → ask anything; it knows your state
+CONTENT    → topic+offer → full video pack (disclosure built in)
+SERVICE    → your fastest income: the sell-side kit
+TRACKER    → log metrics; rank creatives by EPC
+JOBS       → code review + claims audit on the big models
+
+The full written plan lives at:
+  ~/workspace/affiliate_stack/MASTERPLAN.md
+Research reports:
+  ~/workspace/affiliate_research/
+
+Honest timeline reminder:
+  first commission 6-12 weeks · consistent income 6-12 months
+  most people make £0-£150 in the first 90 days.
+  Services (Service Kit) are what pay sooner.`;
+}
+async function runReview(){
+  await api('/api/jobs/review',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+  setTimeout(loadJobs,800);
+}
+async function runAudit(){
+  const d=document.getElementById('auditDir').value.trim();
+  if(!d){document.getElementById('jobOut').textContent='enter a kit folder first';return;}
+  await api('/api/jobs/audit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({dir:d})});
+  setTimeout(loadJobs,800);
+}
+async function runHarden(){
+  const d=document.getElementById('auditDir').value.trim();
+  if(!d){document.getElementById('jobOut').textContent='enter a kit folder first';return;}
+  await api('/api/jobs/harden',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({dir:d})});
+  setTimeout(loadJobs,1500);
+}
+async function pg(q){document.getElementById('pg-q').value=q;findPrograms();}
+async function findPrograms(){
+  const q=document.getElementById('pg-q').value.trim()||'AI';
+  document.getElementById('pg-status').textContent='searching live program data…';
+  try{
+    const d=await api('/api/programs?q='+encodeURIComponent(q)+'&limit=12');
+    document.getElementById('pg-status').textContent=d.count+' programs';
+    document.getElementById('pg-results').innerHTML=d.programs.length?d.programs.map(p=>{
+      const rec=(p.commission_type||'').toLowerCase()==='recurring';
+      return `<div class="listitem"><div style="min-width:0">
+        <div class="lt">${esc(p.name)} <span class="pill">${esc(p.commission_rate||'')}</span>
+          ${rec?'<span class="pill done">recurring</span>':'<span class="pill">one-off</span>'}
+          ${p.verified?'<span class="pill">✓verified</span>':''}</div>
+        <div class="muted">${esc(p.category||'')} · score ${p.score} · cookie ${p.cookie_days||'?'}d · via ${esc(p.network||'direct')} · approval: ${esc(p.approval||'?')} ${p.approval_time?('('+esc(p.approval_time)+')'):''}</div>
+        <div class="muted" style="margin-top:3px">${esc((p.description||'').slice(0,150))}</div>
+        ${p.signup_url?`<div class="t-tools" style="margin-top:5px"><code>${esc(p.signup_url)}</code></div>`:''}
+        </div>
+        <div style="flex:0 0 auto"><a class="btn sec small" href="${esc(p.signup_url||p.url||'#')}" target="_blank" rel="noopener">Open</a></div>
+      </div>`;}).join(''):'<div class="empty">No programs found.</div>';
+  }catch(e){document.getElementById('pg-status').textContent='error: '+e.message;}
+}
+// ---------- Niche Lab ----------
+async function runNiche(){
+  const seeds=document.getElementById('n-seeds').value.trim();
+  if(!seeds){document.getElementById('n-status').textContent='enter seed topics first';return;}
+  const model=document.getElementById('n-model').value;
+  document.getElementById('n-status').textContent='researching… (LLM synthesis can take a few minutes)';
+  try{
+    await api('/api/jobs/niche',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({seeds,geo:document.getElementById('n-geo').value,model:model||null})});
+    document.getElementById('n-status').textContent='job started — results appear when done';
+    setTimeout(loadNiches,20000);
+  }catch(e){document.getElementById('n-status').textContent='error: '+e.message;}
+}
+async function loadNiches(){
+  try{
+    const d=await api('/api/niches');
+    const n=d.niches||[];
+    document.getElementById('n-niches').innerHTML=n.length?n.map(x=>`
+      <div class="listitem"><div style="min-width:0">
+        <div class="lt">${esc(x.niche||'')} <span class="pill">${esc(x.difficulty||'')}</span></div>
+        <div class="muted" style="margin-top:2px">${esc(x.why_it_works||'')}</div>
+        <div class="muted" style="margin-top:4px"><b>Evidence:</b> ${esc(x.demand_evidence||'')}</div>
+        <div class="muted" style="margin-top:3px"><b>Money:</b> ${esc(x.monetisation||'')}</div>
+        <div class="muted" style="margin-top:3px"><b>First content:</b> ${esc(x.first_content||'')}</div>
+        <div class="muted" style="margin-top:3px"><b>Risk:</b> ${esc(x.risk||'')}</div>
+      </div></div>`).join(''):'<div class="muted">No synthesised niches yet. Run research with an LLM selected.</div>';
+
+    const c=d.candidates||[];
+    document.getElementById('n-cands').innerHTML=c.length?
+      '<div class="t-tools mono" style="white-space:pre-wrap">'+c.slice(0,30).map(r=>
+        `${String(r.score).padStart(6)}  spec ${String(r.specificity).padEnd(4)}  ${r.term}`
+      ).join('\n')+'</div>':'<div class="muted">No candidates yet.</div>';
+    if(d.ts)document.getElementById('n-status').textContent='last run '+new Date(d.ts*1000).toLocaleString();
+  }catch(e){document.getElementById('n-niches').innerHTML='<div class="muted">error: '+esc(e.message)+'</div>';}
+}
+
+// ---------- Build pipeline ----------
+function packList(){
+  return Array.from(document.querySelectorAll('#b-pack option')).map(o=>o.value);
+}
+async function buildRender(){
+  const p=document.getElementById('b-pack').value;
+  if(!p){document.getElementById('b-status').textContent='pick a pack';return;}
+  document.getElementById('b-status').textContent='render queued (behind any ComfyUI work)';
+  try{await api('/api/jobs/render',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({pack:'content_out/'+p,steps:28,aspect:'16:9'})});
+    setTimeout(loadJobs,1200);}catch(e){document.getElementById('b-status').textContent='error: '+e.message;}
+}
+async function buildBridge(){
+  const p=document.getElementById('b-pack').value;
+  const url=document.getElementById('b-url').value.trim();
+  const offer=document.getElementById('b-offer').value.trim();
+  if(!p||!url||!offer){document.getElementById('b-status').textContent='pack, offer name and link all required';return;}
+  document.getElementById('b-status').textContent='building bridge page…';
+  try{await api('/api/jobs/bridge',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({pack:'content_out/'+p,offer_url:url,offer_name:offer})});
+    document.getElementById('b-status').textContent='bridge page job started';setTimeout(loadJobs,1200);}
+  catch(e){document.getElementById('b-status').textContent='error: '+e.message;}
+}
+async function buildPublish(){
+  const p=document.getElementById('b-pack').value;
+  const offer=document.getElementById('b-offer').value.trim();
+  if(!p||!offer){document.getElementById('b-status').textContent='pack and offer name required';return;}
+  document.getElementById('b-status').textContent='cutting bundles…';
+  try{await api('/api/jobs/publish',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({pack:'content_out/'+p,offer_name:offer})});
+    document.getElementById('b-status').textContent='publish job started';setTimeout(loadJobs,1200);}
+  catch(e){document.getElementById('b-status').textContent='error: '+e.message;}
+}
+// ---------- Outreach ----------
+async function loadOutreach(){
+  try{
+    const d=await api('/api/outreach/leads');
+    const s=d.stats||{};
+    document.getElementById('o-stats').innerHTML=
+      `leads <b>${s.leads||0}</b> · contacts <b>${s.touches||0}</b> · replied <b>${s.replied_leads||0}</b> · won <b>${s.won||0}</b> · suppressed <b>${s.suppressed||0}</b>`;
+
+    document.getElementById('o-leads').innerHTML=(d.leads||[]).length?(d.leads||[]).map(l=>`
+      <div class="listitem"><div style="min-width:0">
+        <div class="lt">${esc(l.business||l.name||'?')} <span class="pill">${esc(l.channel)}</span>
+          ${l.is_limited_company?'<span class="pill">LTD</span>':''}
+          ${l.last_status?`<span class="pill">${esc(l.last_status)}</span>`:''}</div>
+        <div class="muted">${esc(l.niche||'')} ${l.product_count?('· '+l.product_count+' products'):''} · ${l.touches} contact${l.touches==1?'':'s'}</div>
+      </div>
+      <div class="row" style="flex-wrap:nowrap">
+        <button class="btn sec small" onclick="draftFor(${l.id})">Draft</button>
+        <button class="btn sec small" onclick="logLead(${l.id},'sent')">Sent</button>
+        <button class="btn sec small" onclick="logLead(${l.id},'replied')">Replied</button>
+        <button class="btn sec small" onclick="logLead(${l.id},'won')">Won</button>
+        <button class="btn sec small" onclick="logLead(${l.id},'declined')">Declined</button>
+      </div></div>`).join(''):'<div class="empty">No leads yet. Add one above.</div>';
+
+    document.getElementById('o-due').innerHTML=(d.due||[]).length?(d.due||[]).map(l=>`
+      <div class="listitem"><div><div class="lt">${esc(l.business||l.name||'?')}</div>
+      <div class="muted">${esc(l.channel)} · ${l.days_since}d since contact ${l.touches}</div></div>
+      <button class="btn sec small" onclick="draftFor(${l.id},'followup')">Draft follow-up</button></div>`).join('')
+      :'<div class="muted">Nobody due right now.</div>';
+
+    const caps=d.caps||{};
+    document.getElementById('o-caps').innerHTML='Today: '+Object.entries(caps).map(([c,v])=>
+      `${c} <b style="color:${v.sent>=v.cap?'#ff6b6b':'inherit'}">${v.sent}/${v.cap}</b>`).join(' · ');
+  }catch(e){
+    document.getElementById('o-stats').textContent='error: '+e.message;
+  }
+}
+async function addLead(){
+  const b={name:document.getElementById('o-name').value,business:document.getElementById('o-biz').value,
+    channel:document.getElementById('o-ch').value,niche:document.getElementById('o-niche').value,
+    handle:document.getElementById('o-handle').value,
+    is_limited_company:document.getElementById('o-ltd').checked};
+  if(!b.business&&!b.name){document.getElementById('o-add-status').textContent='name or business required';return;}
+  try{
+    const r=await api('/api/outreach/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+    document.getElementById('o-add-status').textContent=r.skipped?r.note:'added';
+    if(!r.skipped){document.getElementById('o-name').value='';document.getElementById('o-biz').value='';
+      document.getElementById('o-handle').value='';}
+    loadOutreach();
+  }catch(e){document.getElementById('o-add-status').textContent='error: '+e.message;}
+}
+async function draftFor(id,kind){
+  kind=kind||'first';
+  try{
+    const d=await api('/api/outreach/draft?lead_id='+id+'&kind='+kind);
+    document.getElementById('o-draft').textContent=d.body||'(nothing generated)';
+    document.getElementById('o-blockers').innerHTML=(d.problems||[]).length?
+      '<div class="pill" style="display:block;margin-top:8px;padding:9px;background:rgba(255,90,90,.15)">'+
+      (d.problems||[]).map(p=>'DO NOT SEND: '+esc(p)).join('<br>')+'</div>':'' ;
+    document.getElementById('o-caps').textContent=(d.can_send?'':'CANNOT SEND — ')+d.cap;
+  }catch(e){document.getElementById('o-draft').textContent='error: '+e.message;}
+}
+async function logLead(id,status){
+  try{
+    await api('/api/outreach/log',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({lead_id:id,status})});
+    loadOutreach();
+  }catch(e){alert(e.message);}
+}
+async function findLeads(){
+  const niche=document.getElementById('o-niche-find').value.trim();
+  const loc=document.getElementById('o-loc').value.trim()||'UK';
+  const lim=document.getElementById('o-limit').value||12;
+  const st=document.getElementById('o-find-status');
+  if(!niche){st.textContent='enter a niche';return;}
+  st.textContent='searching…';
+  document.getElementById('o-find-results').innerHTML='';
+  try{
+    const d=await api(`/api/outreach/find?niche=${encodeURIComponent(niche)}&location=${encodeURIComponent(loc)}&limit=${lim}`);
+    st.textContent=`found ${d.found} · imported ${d.imported}`
+      +(d.skipped_suppressed?` · ${d.skipped_suppressed} suppressed`:''); 
+    document.getElementById('o-find-results').innerHTML=(d.leads||[]).map(l=>`
+      <div class="listitem"><div style="min-width:0">
+        <div class="lt">${esc(l.shop||'')} <span class="pill">${l.score}</span>
+          ${l.ltd?'<span class="pill" style="background:rgba(255,140,60,.2)">LTD — no cold email</span>':''}</div>
+        <div class="muted">${esc((l.why||[]).join(' · '))}</div>
+      </div></div>`).join('')||'<div class="muted">nothing found for that niche</div>';
+    loadOutreach();
+  }catch(e){st.textContent='error: '+e.message;}
+}
+async function loadJobs(){
+  const d=await api('/api/jobs');
+  document.getElementById('jobs').innerHTML=d.jobs.length?d.jobs.map(j=>`
+    <div class="listitem" onclick="showJob('${j.id}')" style="cursor:pointer">
+      <div><div class="lt">${esc(j.kind)} · ${esc((j.args||'').slice(0,44))}</div>
+      <div class="muted mono">${esc(j.id)}</div></div>
+      <span class="pill ${j.status}">${esc(j.status)}</span></div>`).join(''):'<div class="empty">No jobs yet.</div>';
+}
+async function showJob(id){
+  const j=await api('/api/jobs/'+id);
+  document.getElementById('jobOut').textContent=j.output||'(no output yet)';
+}
+(async function init(){await loadModels();await load();await loadPacks();await loadKits();await loadOutreach();})();
+setInterval(()=>{if(document.getElementById('v-jobs').classList.contains('active'))loadJobs();},6000);
+</script>
+</body>
+</html>

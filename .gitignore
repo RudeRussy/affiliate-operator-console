@@ -1,0 +1,43 @@
+# --- secrets & local data (NEVER commit) ---
+.env
+.env.*
+*.db
+*.db-wal
+*.db-shm
+outreach.db*
+tracker.db*
+console*.db*
+*.sqlite
+*.sqlite3
+
+# --- generated / private business data ---
+# lead lists and found prospects are personal data about real businesses
+found_leads.json
+service_kit/
+outbox/
+renders/
+media/
+*.bak-*
+KIMI_REVIEW_BRIEF.md
+KIMI_K3_REVIEW_*.md
+
+# internal strategy + review notes (personal financial context, not for publication)
+MASTERPLAN.md
+code_review*.md
+affiliate_research/
+
+# --- python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# --- os / editor ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
